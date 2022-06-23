@@ -1,6 +1,10 @@
+import { ManyToMany, Entity, Column, PrimaryGeneratedColumn, BeforeInsert, BeforeUpdate } from 'typeorm'
+import * as bcrypt from 'bcrypt';
+
+
 import { Organization } from 'src/organization/organization.entity';
-import { ManyToMany, JoinTable, Entity, Column, PrimaryGeneratedColumn } from 'typeorm'
 import { Roles } from './roles.enumt';
+
 @Entity()
 export class User {
     @PrimaryGeneratedColumn()
@@ -23,4 +27,10 @@ export class User {
 
     @ManyToMany(() => Organization, (org: Organization) => org.members)
     orgList: Organization[];
+
+    @BeforeInsert()
+    @BeforeUpdate()
+    async hashPassword() {
+        this.password = await bcrypt.hash(this.password, 10);
+    }
 }

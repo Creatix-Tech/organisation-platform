@@ -7,6 +7,7 @@ export class UserOfOrg {
     @MaxLength(16)
     orgName!: string;
 
+
     @IsEmail()
     uEmail!: string
 }

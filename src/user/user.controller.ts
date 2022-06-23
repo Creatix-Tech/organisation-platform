@@ -1,12 +1,14 @@
 import { Body, Controller, Get, Param, Put, Query } from '@nestjs/common';
-import { UserService } from './user.service';
 import { UseGuards, Request } from '@nestjs/common';
+import { ApiBearerAuth } from '@nestjs/swagger';
+
+
+import { UserService } from './user.service';
 import { Roles } from './roles.enumt';
 import { JwtAuthGuard } from 'src/guards/jwt-auth.guard';
 import { Role } from 'src/decorators/role.decorator';
 import { RolesGuard } from 'src/guards/roles.guard';
 import { UpdateUserDto } from './dtos/updateUser.dto';
-import { ApiBearerAuth } from '@nestjs/swagger';
 
 @ApiBearerAuth()
 @Controller('user')

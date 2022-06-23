@@ -1,16 +1,20 @@
 import { Module } from '@nestjs/common';
+import { PassportModule } from '@nestjs/passport';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { ConfigModule } from '@nestjs/config';
+
+
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UserModule } from './user/user.module';
 import { OrganizationModule } from './organization/organization.module';
 import { AuthModule } from './auth/auth.module';
-import { ConfigModule } from '@nestjs/config';
-import { PassportModule } from '@nestjs/passport';
-import { TypeOrmModule } from '@nestjs/typeorm';
 import { Organization } from './organization/organization.entity';
 import { User } from './user/user.entity';
 import { ServiceConfig } from './common/configservice';
 import { CommonModule } from './common/common.module';
+
+
 @Module({
   imports: [ConfigModule.forRoot({
     isGlobal: true,

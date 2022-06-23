@@ -1,11 +1,14 @@
 import { IsEmail, Matches } from "class-validator";
 
+
+import { constants } from "src/common/constants/validation.constants";
+
 export class LoginUserDto {
     @IsEmail()
     username!: string;
 
-    @Matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/, {
-        message: 'Minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character'
+    @Matches(constants.emailPattern, {
+        message: constants.invalidEmailMessage
     })
     password!: string;
 }

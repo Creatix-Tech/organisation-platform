@@ -1,5 +1,7 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
+
+
 import { UserService } from 'src/user/user.service';
 import { UserDto } from 'src/user/dtos/user.dto';
 import { User } from 'src/user/user.entity';
@@ -12,7 +14,7 @@ export class AuthService {
         private jwtService: JwtService
     ) { }
 
-    async validateUser(username: string, pass: string): Promise<any> {
+    async validateUser(username: string, pass: string): Promise<Partial<User>> {
         const user = await this.userService.findOne(username);
 
         if (user) {
@@ -40,7 +42,7 @@ export class AuthService {
         let user;
         try {
             user = await this.userService.findOne(dto.email);
-        } catch (ex: any) { }
+        } catch (exception) { }
         if (user) {
             throw new BadRequestException('exist')
         }

@@ -1,4 +1,6 @@
 import { Body, Controller, Post, Patch, Put, UseGuards, Delete } from '@nestjs/common';
+
+
 import { UserOfOrg } from './dtos/userOfOrg.dto';
 import { OrganizationDto } from './dtos/organization.dto';
 import { OrganizationService } from './organization.service';
@@ -23,7 +25,8 @@ export class OrganizationController {
     @Role(Roles.Admin)
     @Delete()
     async deleteOrg(@Body() orgName: string) {
-        return await this.organizationService.deleteOrganization(orgName);
+        await this.organizationService.deleteOrganization(orgName);
+        return `Successfully deleted ${orgName} from system`;
     }
 
     @Role(Roles.Admin)
